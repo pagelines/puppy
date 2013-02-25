@@ -1,0 +1,136 @@
+//LESS guards:
+@puppyLight: rgba(255,255,255,0.5);
+@puppyDark: rgba(0,0,0,0.5);
+@puppyFlip: contrast(@pl-base, @puppyDark, @puppyLight, 0.5);
+@puppyBaseTrans: fade(@pl-base, 90%);
+
+//LESS mixins
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+.puppy-box-shadow (@puppy-bo-shadow: 5px) {
+	-moz-box-shadow: 0 0 @puppy-bo-shadow @puppyDark;
+	-webkit-box-shadow: 0 0 @puppy-bo-shadow @puppyDark;
+	box-shadow: 0 0 @puppy-bo-shadow @puppyDark;
+}
+.text-shadow (@puppy-tx-shadow: 5px) {
+	text-shadow: 0 0 @puppy-tx-shadow @puppyDark;
+}
+
+
+//Plugin less
+#puppy-container {
+	visibility: hidden;
+	width: 100%;
+	max-width: @puppy_width;
+	position: fixed;
+	bottom: -300px;
+	right: 10px;
+	background-color: @puppyFlip;
+	h3 {
+		color:@puppyBaseTrans;
+		.text-shadow ();
+		font-weight: auto;
+		margin-top: 5px;
+	}
+	h5 {
+		color:@puppyBaseTrans;
+		.text-shadow (2px);
+		font-weight: auto;
+	}
+	.puppy-box-shadow ();
+	.rounded-corners (5px);
+	.puppy-outer {
+		.puppy-close {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			cursor: pointer;
+			font-weight: 500;
+			background: @puppyBaseTrans;
+			color: @puppyFlip;
+			width: 15px;
+			height: 15px;
+			-webkit-border-radius: 12px;
+			-moz-border-radius:    12px;
+			border-radius:         12px;
+			text-align: center;
+			font-size: 11px;
+			line-height: 15px;
+			.puppy-box-shadow ();
+		}
+	}
+}
+.puppy-header {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+.puppy-like {
+	.puppy-buttons-wrapper {
+		width: 100%;
+		float: left;
+		.puppy-facebook-button {
+			float: left;
+			width: @puppy_facebook_width;
+			overflow:hidden;
+			.fb-like {
+				span {
+					width:auto!important;
+					iframe {
+						max-width: none;
+					}
+				}
+			}
+		}
+		.puppy-twitter-button {
+			float: left;
+			width: 100px !important;
+		}
+		.puppy-linkedin-button {
+			float: left;
+			width: 87px;
+		}
+		.social-buttons {
+			list-style: none;
+			padding: 0;
+			> li { 
+				margin: 0;
+				float: left;
+				line-height: 18px;
+			}
+		}
+	}
+}
+.puppy-random-post {
+	a {
+		color:@puppyBaseTrans;
+		.text-shadow (2px);
+		font-weight: auto;
+		.puppy-random-link {
+			li {
+				display:inline-block;
+				&:hover {
+					text-decoration:underline;
+				}
+			}
+		}
+	}
+}
+.puppy-content {
+	margin: 10px;
+	min-height: 18px;
+}
+.puppy-button {
+	max-width:100%;
+	.puppy-button-button {
+		text-align: center;
+		.btn {
+			width:100%;
+			padding:4px 0px 4px;
+		}
+	}
+}
