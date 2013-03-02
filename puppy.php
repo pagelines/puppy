@@ -305,7 +305,7 @@ class Puppy {
 		// options array for creating the settings tab
 		$options = array(
 			// icon for the settings tab
-			'icon' => $icon_path . '/settings-icon.png',
+			'icon' => $icon_path . '/icon.png',
 
 			'puppy_scroll'  => array(
 				'type'     => 'text',
@@ -383,7 +383,7 @@ class Puppy {
 					'facebook_appid' =>  array(
 						'default'   =>  '',
 						'type'    =>  'text',
-						'inputlabel'  =>  __('Your Facebook app id:', 'pagelines'),
+						'inputlabel'  =>  __('Your Facebook App ID: (App ID is used to track likes with Facebook Opengraph)', 'pagelines'),
 					),
 					'puppy_facebook_width'  => array(
 						'type'     => 'text',
