@@ -39,7 +39,7 @@ class Puppy {
 
 	function show() {
 
-		if (ploption('puppy_posts')==true) {
+		if (ploption( 'puppy_posts' )) {
 			if (is_single()) {
 				$this->container();
 			}
@@ -49,15 +49,16 @@ class Puppy {
 	}
 
 	function container() {
+		
+		$title = ploption( 'puppy_title' ) ? ploption( 'puppy_title' ) : '<div class="puppy-default-title">This is Puppy!</div><h5 class="puppy-title-instructions center">Go to: </br> PageLines -> Site options -> Puppy </br> to setup Puppy.</h5>';
+
 		?>
 			<div id="puppy-container" class="hidden-phone">
 				<div class="puppy-outer">
 					<div class="puppy-close">X</div>
-					<?php if ( ploption('puppy_title') ) { ?>
 						<h3 class="puppy-title puppy-content">
-							<?php echo ploption('puppy_title'); ?>
+							<?php echo $title; ?>
 						</h3>
-					<?php } ?>
 					<div class="puppy-inner">
 						<?php if (ploption('puppy_enable_random_post')==true) { ?>
 							<?php $this->random_post(); ?>
@@ -84,21 +85,21 @@ class Puppy {
 		
 		wp_enqueue_script( 'jquery' );
 
-		$jquery_easing = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), '/js/jquery.easing.1.3.js' );
+		$jquery_easing = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), 'js/jquery.easing.1.3.js' );
 
 		wp_enqueue_script( 'jquery-easing', $jquery_easing );
 
-		$script = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), '/js/script.js' );
+		$script = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), 'js/script.js' );
 
 		wp_enqueue_script( 'puppy_script', $script );
 
 		$params_scroll = array(
-			'scroll' => ploption( 'puppy_scroll' ) ? ploption( 'puppy_scroll' ) : '300$'
+			'scroll' => ploption( 'puppy_scroll' ) ? ploption( 'puppy_scroll' ) : 300
 		);
 
 		wp_localize_script( 'puppy_script', 'puppy_script_params', $params_scroll );
 
-		$socialite = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), '/js/socialite.js' );
+		$socialite = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), 'js/socialite.js' );
 
 		wp_enqueue_script( 'social_excerpts_socialite', $socialite );
 
@@ -320,7 +321,7 @@ class Puppy {
 					true => array( 'name' => __( 'Yes'   , 'pagelines' )),
 					false => array( 'name' => __( 'No'   , 'pagelines' ))
 				),
-				'inputlabel'  =>  __('Only show on posts and pages? (default is "Yes")', 'pagelines'),
+				'inputlabel'  =>  __('Only show on posts and pages? (default is "No")', 'pagelines'),
 				'title'      => __( 'Where to show?', 'pagelines' ),
 				'shortexp'      => __( 'Only show on posts and pages?', 'pagelines' )
 			),
@@ -404,7 +405,7 @@ class Puppy {
 						'inputlabel' => __( 'Enable LinkedIn button', 'pagelines' ),
 					),
 					'puppy_linkedin_company_id'  => array(
-						'inputlabel'  => __( "Your company's LinkedIn page ID", 'pagelines' ),
+						'inputlabel'  => __( "Your company's LinkedIn page ID - Find your ID with <a href='https://developer.linkedin.com/apply-getting-started#company-lookup' target='_blank'>this tool</a>", 'pagelines' ),
 						'type'   => 'text'
 					),
 				),
@@ -422,7 +423,7 @@ class Puppy {
 						'inputlabel' => __( 'Enable Button & Modal', 'pagelines' ),
 					),
 					'puppy_text_above_button'  => array(
-						'inputlabel'  => __( 'Text above Random Post', 'pagelines' ),
+						'inputlabel'  => __( 'Text above button', 'pagelines' ),
 						'type'   => 'text'
 					),
 					'puppy_button_text'  => array(
