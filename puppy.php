@@ -40,7 +40,7 @@ class Puppy {
 	function show() {
 
 		if (ploption( 'puppy_posts' )) {
-			if (is_single()) {
+			if (is_single() || is_page()) {
 				$this->container();
 			}
 		} else {
