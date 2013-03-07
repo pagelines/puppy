@@ -1,13 +1,13 @@
 == Description ==
 <h3>What is Puppy?</h3>
 
-Puppy is plugin that creates a non-intrusive pop-up to send your visitors to another interesting post, liking or follow your company, or sending you a message. These are just some of the options you can enable with Puppy. You can also choose to use the 3 shortcodes anywhere else on your site: [puppyrandom], [puppysocial] and [puppybutton]. 
+Puppy is plugin that creates a non-intrusive pop-up to send your visitors to another interesting post, lliking or following your company, or sending you a message. These are just some of the options you can enable with Puppy. You can also choose to use the 3 shortcodes anywhere else on your site: [puppyrandom], [puppysocial] and [puppybutton]. 
 
 [puppyrandom] outputs a random post.
 [puppysocial] outputs the social buttons from Puppy.
 [puppybutton] outputs a button, that on click opens a modal.
 
-It is an amazing plugin that will make your visitors spend more time on your site, motivate them to following you or your company on various social media sites or you can motivate them to contact you from a modal. There are loads of options for your customization.
+It is an amazing plugin that will make your visitors spend more time on your site, motivate them to follow you or your company on various social media sites or you can motivate them to contact you from a modal. There are loads of options for your customization.
 
 Want it? <strong>Buy it!! :)</strong>
 

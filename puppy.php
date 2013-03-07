@@ -377,7 +377,7 @@ class Puppy {
 						'inputlabel' => __( 'Enable Facebook button', 'pagelines' ),
 					),
 					'puppy_facebook_like_link'  => array(
-						'inputlabel'  => __( 'Link to Like on Facebook', 'pagelines' ),
+						'inputlabel'  => __( 'Link to Like on Facebook  (remember http://)', 'pagelines' ),
 						'type'   => 'text'
 					),
 					'facebook_appid' =>  array(
@@ -396,7 +396,7 @@ class Puppy {
 						'inputlabel' => __( 'Enable Twitter button', 'pagelines' ),
 					),
 					'puppy_twitter_follow_link'  => array(
-						'inputlabel'  => __( 'Link to your Twitter profile', 'pagelines' ),
+						'inputlabel'  => __( 'Link to your Twitter profile (remember http://)', 'pagelines' ),
 						'type'   => 'text'
 					),
 					'puppy_enable_linkedin' => array(
