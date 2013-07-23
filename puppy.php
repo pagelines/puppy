@@ -7,17 +7,18 @@ Author: Aleksander Hansson
 Author URI: http://ahansson.com
 Demo: http://puppy.ahansson.com
 Tags: extension
+v3: true
 */
 
 class Puppy {
 
 	function __construct() {
- 
+
 		add_action( 'wp_footer', array( &$this, 'show' ) );
 		add_action( 'wp_enqueue_scripts', array( &$this, 'js' ) );
 		add_action( 'template_redirect', array( &$this,'custom_less' ) );
 		add_action( 'wp_head', array( &$this,'head' ) );
-		add_action( 'admin_init', array( &$this, 'settings' ) );
+		add_action( 'init', array( &$this, 'settings' ) );
 		add_action( 'init', array( &$this, 'shortcode' ) );
 		add_filter( 'pless_vars', array( &$this, 'mixin' ) );
 
@@ -49,8 +50,8 @@ class Puppy {
 	}
 
 	function container() {
-		
-		$title = ploption( 'puppy_title' ) ? ploption( 'puppy_title' ) : '<div class="puppy-default-title">This is Puppy!</div><h5 class="puppy-title-instructions center">Go to: </br> PageLines -> Site options -> Puppy </br> to setup Puppy.</h5>';
+
+		$title = ploption( 'puppy_title' ) ? ploption( 'puppy_title' ) : '<div class="puppy-default-title">This is Puppy!</div><h5 class="puppy-title-instructions center">Go to: </br> PageLines -> Global Options -> Puppy </br> to setup Puppy.</h5>';
 
 		?>
 			<div id="puppy-container" class="hidden-phone">
@@ -80,9 +81,9 @@ class Puppy {
 		<?php
 		$this->modal();
 	}
-	
+
 	function js() {
-		
+
 		wp_enqueue_script( 'jquery' );
 
 		$jquery_easing = sprintf( '%s/%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )), 'js/jquery.easing.1.3.js' );
@@ -113,11 +114,11 @@ class Puppy {
 	}
 
 	function custom_less() {
-		
+
 		$file = sprintf( '%sstyle.less', plugin_dir_path( __FILE__ ) );
-		
+
 		pagelines_insert_core_less( $file );
-	
+
 	}
 
 	function random_post() {
@@ -258,14 +259,14 @@ class Puppy {
 		$output = ob_get_clean();
 		return $output;
 	}
-	
+
 	function social_buttons_shortcode_markup() {
 		ob_start();
 		$this->social_buttons();
 		$output = ob_get_clean();
 		return $output;
 	}
-	
+
 	function button_shortcode_markup() {
 		ob_start();
 		$this->button();
@@ -281,7 +282,7 @@ class Puppy {
 	}
 
 	function mixin( $constants ){
-		 
+
 		$facebook_width = ploption( 'puppy_facebook_width') ? sprintf ('%spx', ploption( 'puppy_facebook_width' )) : '92px';
 		$puppy_width = ploption( 'puppy_width') ? sprintf ('%spx', ploption( 'puppy_width' )) : '325px';
 
@@ -300,44 +301,40 @@ class Puppy {
 	}
 
 	function settings() {
-		// settings icon path
-		$icon_path = sprintf( '%s/%s', WP_PLUGIN_URL, basename(dirname( __FILE__ )));
 		// options array for creating the settings tab
 		$options = array(
-			// icon for the settings tab
-			'icon' => $icon_path . '/icon.png',
 
 			'puppy_scroll'  => array(
 				'type'     => 'text',
-				'inputlabel'  => __( 'Script fire', 'pagelines' ),
-				'title'      => __( 'Script fire', 'pagelines' ),
-				'shortexp'      => __( 'How many pixels from the bottom should the script fire? (default is 300)', 'pagelines' )
+				'inputlabel'  => __( 'Script fire', 'puppy' ),
+				'title'      => __( 'Script fire', 'puppy' ),
+				'shortexp'      => __( 'How many pixels from the bottom should the script fire? (default is 300)', 'puppy' )
 			),
 
 			'puppy_posts'  => array(
 				'default'       => true,
 				'type'           => 'select',
 				'selectvalues'     => array(
-					true => array( 'name' => __( 'Yes'   , 'pagelines' )),
-					false => array( 'name' => __( 'No'   , 'pagelines' ))
+					true => array( 'name' => __( 'Yes'   , 'puppy' )),
+					false => array( 'name' => __( 'No'   , 'puppy' ))
 				),
-				'inputlabel'  =>  __('Only show on posts and pages? (default is "No")', 'pagelines'),
-				'title'      => __( 'Where to show?', 'pagelines' ),
-				'shortexp'      => __( 'Only show on posts and pages?', 'pagelines' )
+				'inputlabel'  =>  __('Only show on posts and pages? (default is "No")', 'puppy'),
+				'title'      => __( 'Where to show?', 'puppy' ),
+				'shortexp'      => __( 'Only show on posts and pages?', 'puppy' )
 			),
 
 			'puppy_width'  => array(
 				'type'     => 'text',
-				'inputlabel'  => __( 'Puppy Width', 'pagelines' ),
-				'title'      => __( 'Puppy Width', 'pagelines' ),
-				'shortexp'      => __( 'How wide do you want the container?', 'pagelines' )
+				'inputlabel'  => __( 'Puppy Width', 'puppy' ),
+				'title'      => __( 'Puppy Width', 'puppy' ),
+				'shortexp'      => __( 'How wide do you want the container?', 'puppy' )
 			),
 
 			'puppy_title'  => array(
 				'type'     => 'text',
-				'inputlabel'  => __( 'Puppy title', 'pagelines' ),
-				'title'      => __( 'Puppy title', 'pagelines' ),
-				'shortexp'      => __( 'Input your title for Puppy', 'pagelines' )
+				'inputlabel'  => __( 'Puppy title', 'puppy' ),
+				'title'      => __( 'Puppy title', 'puppy' ),
+				'shortexp'      => __( 'Input your title for Puppy', 'puppy' )
 			),
 
 			'puppy_random_post'  => array(
@@ -347,15 +344,15 @@ class Puppy {
 					'puppy_enable_random_post' => array(
 						'default'  => false,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable Random Post', 'pagelines' ),
+						'inputlabel' => __( 'Enable Random Post', 'puppy' ),
 					),
 					'puppy_text_above_random_post'  => array(
-						'inputlabel'  => __( 'Text above Random Post', 'pagelines' ),
+						'inputlabel'  => __( 'Text above Random Post', 'puppy' ),
 						'type'   => 'text'
 					),
 				),
-				'title'      => __( 'Random Post Settings', 'pagelines' ),
-				'shortexp'      => __( 'Type in your settings', 'pagelines' )
+				'title'      => __( 'Random Post Settings', 'puppy' ),
+				'shortexp'      => __( 'Type in your settings', 'puppy' )
 			),
 
 			'puppy_social_buttons'  => array(
@@ -365,52 +362,52 @@ class Puppy {
 					'puppy_enable_social' => array(
 						'default'  => false,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable Social buttons', 'pagelines' ),
+						'inputlabel' => __( 'Enable Social buttons', 'puppy' ),
 					),
 					'puppy_text_above_social'  => array(
-						'inputlabel'  => __( 'Text above social buttons', 'pagelines' ),
+						'inputlabel'  => __( 'Text above social buttons', 'puppy' ),
 						'type'   => 'text'
 					),
 					'puppy_enable_facebook' => array(
 						'default'  => false,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable Facebook button', 'pagelines' ),
+						'inputlabel' => __( 'Enable Facebook button', 'puppy' ),
 					),
 					'puppy_facebook_like_link'  => array(
-						'inputlabel'  => __( 'Link to Like on Facebook  (remember http://)', 'pagelines' ),
+						'inputlabel'  => __( 'Link to Like on Facebook  (remember http://)', 'puppy' ),
 						'type'   => 'text'
 					),
 					'facebook_appid' =>  array(
 						'default'   =>  '',
 						'type'    =>  'text',
-						'inputlabel'  =>  __('Your Facebook App ID: (App ID is used to track likes with Facebook Opengraph)', 'pagelines'),
+						'inputlabel'  =>  __('Your Facebook App ID: (App ID is used to track likes with Facebook Opengraph)', 'puppy'),
 					),
 					'puppy_facebook_width'  => array(
 						'type'     => 'text',
-						'inputlabel'  => __( 'Facebook button width', 'pagelines' ),
-						'shortexp'      => __( 'How wide do you want your Facebook button?', 'pagelines' )
+						'inputlabel'  => __( 'Facebook button width', 'puppy' ),
+						'shortexp'      => __( 'How wide do you want your Facebook button?', 'puppy' )
 					),
 					'puppy_enable_twitter' => array(
 						'default'  => true,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable Twitter button', 'pagelines' ),
+						'inputlabel' => __( 'Enable Twitter button', 'puppy' ),
 					),
 					'puppy_twitter_follow_link'  => array(
-						'inputlabel'  => __( 'Link to your Twitter profile (remember http://)', 'pagelines' ),
+						'inputlabel'  => __( 'Link to your Twitter profile (remember http://)', 'puppy' ),
 						'type'   => 'text'
 					),
 					'puppy_enable_linkedin' => array(
 						'default'  => true,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable LinkedIn button', 'pagelines' ),
+						'inputlabel' => __( 'Enable LinkedIn button', 'puppy' ),
 					),
 					'puppy_linkedin_company_id'  => array(
-						'inputlabel'  => __( "Your company's LinkedIn page ID - Find your ID with <a href='https://developer.linkedin.com/apply-getting-started#company-lookup' target='_blank'>this tool</a>", 'pagelines' ),
+						'inputlabel'  => __( "Your company's LinkedIn page ID - Find your ID with <a href='https://developer.linkedin.com/apply-getting-started#company-lookup' target='_blank'>this tool</a>", 'puppy' ),
 						'type'   => 'text'
 					),
 				),
-				'title'      => __( 'Social Buttons Settings', 'pagelines' ),
-				'shortexp'      => __( 'Type in your settings', 'pagelines' )
+				'title'      => __( 'Social Buttons Settings', 'puppy' ),
+				'shortexp'      => __( 'Type in your settings', 'puppy' )
 			),
 
 			'puppy_button_modal'  => array(
@@ -420,57 +417,62 @@ class Puppy {
 					'puppy_enable_button_modal' => array(
 						'default'  => false,
 						'type'   => 'check',
-						'inputlabel' => __( 'Enable Button & Modal', 'pagelines' ),
+						'inputlabel' => __( 'Enable Button & Modal', 'puppy' ),
 					),
 					'puppy_text_above_button'  => array(
-						'inputlabel'  => __( 'Text above button', 'pagelines' ),
+						'inputlabel'  => __( 'Text above button', 'puppy' ),
 						'type'   => 'text'
 					),
 					'puppy_button_text'  => array(
-						'inputlabel'  => __( 'Button Text', 'pagelines' ),
+						'inputlabel'  => __( 'Button Text', 'puppy' ),
 						'type'   => 'text'
 					),
 					'puppy_button_type'  => array(
 						'default'       => ' btn-info',
 						'type'           => 'select',
 						'selectvalues'     => array(
-							' btn-primary' => array( 'name' => __( 'Primary'   , 'pagelines' )),
-							' btn-info' => array( 'name' => __( 'Info'   , 'pagelines' )),
-							' btn-success' => array( 'name' => __( 'Success'   , 'pagelines' )),
-							' btn-warning' => array( 'name' => __( 'Warning'   , 'pagelines' )),
-							' btn-danger' => array( 'name' => __( 'Danger'   , 'pagelines' )),
-							' btn-inverse' => array( 'name' => __( 'Inverse'   , 'pagelines' )),
-							'' => array( 'name' => __( 'Grey'   , 'pagelines' ))
+							' btn-primary' => array( 'name' => __( 'Primary'   , 'puppy' )),
+							' btn-info' => array( 'name' => __( 'Info'   , 'puppy' )),
+							' btn-success' => array( 'name' => __( 'Success'   , 'puppy' )),
+							' btn-warning' => array( 'name' => __( 'Warning'   , 'puppy' )),
+							' btn-danger' => array( 'name' => __( 'Danger'   , 'puppy' )),
+							' btn-inverse' => array( 'name' => __( 'Inverse'   , 'puppy' )),
+							'' => array( 'name' => __( 'Grey'   , 'puppy' ))
 						),
-						'inputlabel'  =>  __('Button type', 'pagelines'),
+						'inputlabel'  =>  __('Button type', 'puppy'),
 					),
 					'puppy_modal_header'  => array(
-						'inputlabel'  => __( 'Modal Header', 'pagelines' ),
+						'inputlabel'  => __( 'Modal Header', 'puppy' ),
 						'type'   => 'text'
 					),
 					'puppy_modal_content'  => array(
-						'inputlabel'  => __( 'Modal Content', 'pagelines' ),
+						'inputlabel'  => __( 'Modal Content', 'puppy' ),
 						'type' 			=> 'textarea',
 						'inputsize'		=> 'big',
 					),
 				),
-				'title'      => __( 'Button with Modal Settings', 'pagelines' ),
-				'shortexp'      => __( 'Type in your settings', 'pagelines' )
+				'title'      => __( 'Button with Modal Settings', 'puppy' ),
+				'shortexp'      => __( 'Type in your settings', 'puppy' )
 			),
-			
+
 			'puppy_custom_content'  => array(
-				'inputlabel'  => __( 'Custom content', 'pagelines' ),
+				'inputlabel'  => __( 'Custom content', 'puppy' ),
 				'type' 			=> 'textarea',
 				'inputsize'		=> 'big',
-				'title'      => __( 'Custom content', 'pagelines' ),
-				'shortexp'      => __( 'You can add custom content for Puppy here', 'pagelines' )
+				'title'      => __( 'Custom content', 'puppy' ),
+				'shortexp'      => __( 'You can add custom content for Puppy here', 'puppy' )
 			),
 
 		);
 
 		// add options page to pagelines settings
-		pl_add_options_page( array( 'name' => 'puppy', 'array' => $options ) );
-	
+		pl_add_options_page(
+			array(
+				'name' => 'Puppy',
+				'array' => $options
+			)
+		);
+
 	}
 
 }
