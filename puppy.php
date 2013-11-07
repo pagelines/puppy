@@ -2,13 +2,12 @@
 /*
 Plugin Name: Puppy
 Description: Puppy is plugin that creates a non-instrusive pop-up to send your visitors to another interesting post. Social network buttons too!
-Version: 2.0
+Version: 2.1
 Author: Aleksander Hansson
 Author URI: http://ahansson.com
 Demo: http://puppy.ahansson.com
 Tags: extension
 v3: true
-PageLines: true
 */
 
 class Puppy {
@@ -22,7 +21,21 @@ class Puppy {
 		add_action( 'init', array( &$this, 'shortcode' ) );
 		add_filter( 'pless_vars', array( &$this, 'mixin' ) );
 		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'init', array( &$this, 'ah_updater_init' ) );
 
+	}
+
+	function ah_updater_init() {
+
+		require_once( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'includes/plugin-updater.php' );
+
+		$config = array(
+			'base'      => plugin_basename( __FILE__ ), 
+			'repo_uri'  => 'http://shop.ahansson.com',  
+			'repo_slug' => 'puppy',
+		);
+
+		new AH_Puppy_Plugin_Updater( $config );
 	}
 
 	function init() {
@@ -362,6 +375,7 @@ class Puppy {
 				),
 
 				array(
+					'key' => 'puppy_where',
 					'type'     => 'multi',
 					'title'      => __( 'Where to show?', 'puppy' ),
 					'opts'   => array(
@@ -404,6 +418,7 @@ class Puppy {
 				),
 
 				array(
+					'key' => 'puppy_random',
 					'type'     => 'multi',
 					'title'      => __( 'Random Post Settings', 'puppy' ),
 					'help'      => __( 'Type in your settings', 'puppy' ),
@@ -423,6 +438,7 @@ class Puppy {
 				),
 
 				array(
+					'key' => 'puppy_social',
 					'type'     => 'multi',
 					'title'      => __( 'Social Buttons Settings', 'puppy' ),
 					'help'      => __( 'Type in your settings', 'puppy' ),
@@ -487,6 +503,7 @@ class Puppy {
 				),
 
 				array(
+					'key' => 'puppy_modal',
 					'type'     => 'multi',
 					'title'      => __( 'Button with Modal Settings', 'puppy' ),
 					'help'      => __( 'Type in your settings', 'puppy' ),

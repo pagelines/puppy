@@ -137,3 +137,21 @@
 		}
 	}
 }
+
+.form-settings-Puppy, {
+    div[class*='opt-puppy_']{
+        display:inline-block;
+        vertical-align: top;
+        padding:10px;
+        .box-sizing(border-box);
+
+        @media(min-width:1500px) { width:25%;    }
+        @media(max-width:1499px) { width:33.333%;}
+        @media(max-width:1200px) { width:50%;}
+        @media(max-width:767px) {
+            width:100%;
+            display: block;
+            padding:0 0 20px 0;
+        }
+    }
+}
